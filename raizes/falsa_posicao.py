@@ -1,15 +1,3 @@
-"""Item 3 — Método da falsa posição (arquivo independente, Python puro).
-
-Seção 5.3 de Chapra & Canale (2008). Em vez do ponto médio, usa a interseção
-da reta que liga (xl, f(xl)) e (xu, f(xu)) com o eixo x (Eq. 5.7):
-
-    xr = xu - f(xu) * (xl - xu) / (f(xl) - f(xu))
-
-Critério de parada igual ao da bisseção: εa < εs, f(xr) = 0 ou limite de
-iterações.
-"""
-
-
 def falsa_posicao(f, xl, xu, es, max_iter=100):
     """Calcula uma raiz de f em [xl, xu] pelo método da falsa posição.
 
@@ -36,7 +24,7 @@ def falsa_posicao(f, xl, xu, es, max_iter=100):
     convergiu = False
     motivo = f"limite de {max_iter} iterações atingido"
 
-    # Raiz exatamente em um dos extremos: nada a iterar (o while nem começa).
+    # Raiz exatamente em um dos extremos
     if fl == 0 or fu == 0:
         if fl == 0:
             xr = xl
@@ -53,7 +41,6 @@ def falsa_posicao(f, xl, xu, es, max_iter=100):
         xr = xu - fu * (xl - xu) / (fl - fu)
         fr = f(xr)
 
-        # εa não é definido na primeira iteração (não há valor anterior).
         ea = None
         if xr_anterior is not None and xr != 0:
             ea = abs((xr - xr_anterior) / xr) * 100

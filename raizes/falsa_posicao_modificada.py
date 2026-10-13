@@ -1,13 +1,3 @@
-"""Item 5 — Método da falsa posição modificado (arquivo independente, Python puro).
-
-Seção 5.3.2 e Figura 5.15 de Chapra & Canale (2008). A falsa posição comum
-pode ficar "unilateral": um extremo fica parado e a convergência fica lenta.
-Na versão modificada, se o mesmo extremo ficar parado por duas iterações
-seguidas, o valor da função nesse extremo é dividido por 2. A reta fica mais
-inclinada e o próximo xr cai mais perto do extremo preso.
-"""
-
-
 def falsa_posicao_modificada(f, xl, xu, es, max_iter=100):
     """Calcula uma raiz de f em [xl, xu] pela falsa posição modificada.
 
@@ -35,7 +25,7 @@ def falsa_posicao_modificada(f, xl, xu, es, max_iter=100):
     convergiu = False
     motivo = f"limite de {max_iter} iterações atingido"
 
-    # Raiz exatamente em um dos extremos: nada a iterar (o while nem começa).
+    # Raiz exatamente em um dos extremos
     if fl == 0 or fu == 0:
         if fl == 0:
             xr = xl
@@ -54,7 +44,6 @@ def falsa_posicao_modificada(f, xl, xu, es, max_iter=100):
         xr = xu - fu * (xl - xu) / (fl - fu)
         fr = f(xr)
 
-        # εa não é definido na primeira iteração (não há valor anterior).
         ea = None
         if xr_anterior is not None and xr != 0:
             ea = abs((xr - xr_anterior) / xr) * 100
